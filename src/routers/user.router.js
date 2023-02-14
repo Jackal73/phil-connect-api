@@ -21,7 +21,7 @@ const { hashPassword, comparePassword } = require("../helpers/bcrypt.helper");
 const { createAccessJWT, createRefreshJWT } = require("../helpers/jwt.helper");
 const { userAuthorization } = require("../middlewares/authorization.middleware");
 
-const verificationURL = "https://phil-connect-api.adaptable.app/verification/";
+const verificationURL = "https://phil-connect.adaptable.app/verification/";
 // const verificationURL = "http://localhost:3000/verification/";
 
 router.all("/", (req, res, next) => {

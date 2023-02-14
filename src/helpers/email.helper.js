@@ -32,7 +32,7 @@ const emailProcessor = ({ email, pin, type, verificationLink = "" }) => {
   switch (type) {
     case "request-new-password":
       info = {
-        from: '"Tikkit " <shawnkebel@kryptomix.digital>', // sender address
+        from: '"Phil Connection " <shawnkebel@kryptomix.digital>', // sender address
         to: email, // list of receivers
         subject: "Password Reset PIN", // Subject line
         text: "Here is your Password Reset PIN: " + pin + " This PIN will expire in 1 day.", // plain text body
@@ -48,7 +48,7 @@ const emailProcessor = ({ email, pin, type, verificationLink = "" }) => {
 
     case "update-password-success":
       info = {
-        from: '"Tikkit " <shawnkebel@kryptomix.digital>', // sender address
+        from: '"Phil Connection " <shawnkebel@kryptomix.digital>', // sender address
         to: email, // list of receivers
         subject: "Password updated", // Subject line
         text: "Your new password has been updated.", // plain text body
@@ -61,7 +61,7 @@ const emailProcessor = ({ email, pin, type, verificationLink = "" }) => {
 
     case "new-user-confirmation-required":
       info = {
-        from: '"Tikkit " <shawnkebel@kryptomix.digital>', // sender address
+        from: '"Phil Connection " <shawnkebel@kryptomix.digital>', // sender address
         to: email, // list of receivers
         subject: "Please verify your new user", // Subject line
         text: "Please follow the link to verify your account.", // plain text body
