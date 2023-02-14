@@ -8,11 +8,13 @@ const corsOptions = {
     "http://localhost:3000",
     "https://frdm-user.adaptable.app",
     "https://tikkit-admin.adaptable.app",
+    "https://phil-connect.adaptable.app", // access-control-allow-origin: http://phil-connect.adaptable.app,
     "https://localhost:3001",
     "https://localhost:3002",
   ],
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-  credentials: true, // access-control-allow-credentials:true
+  credentials: true, // access-control-allow-credentials:true,
+  //  access-control-allow-origin: http://phil-connect.adaptable.app,
   optionSuccessStatus: 200,
 };
 const helmet = require("helmet");
