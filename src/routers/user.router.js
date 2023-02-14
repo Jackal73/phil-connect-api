@@ -21,7 +21,7 @@ const { hashPassword, comparePassword } = require("../helpers/bcrypt.helper");
 const { createAccessJWT, createRefreshJWT } = require("../helpers/jwt.helper");
 const { userAuthorization } = require("../middlewares/authorization.middleware");
 
-const verificationURL = "https://frdm-user.adaptable.app/verification/";
+const verificationURL = "https://phil-connect-api.adaptable.app/verification/";
 // const verificationURL = "http://localhost:3000/verification/";
 
 router.all("/", (req, res, next) => {
@@ -30,7 +30,6 @@ router.all("/", (req, res, next) => {
 
 // Get user profile router
 router.get("/", userAuthorization, async (req, res) => {
-
   // this data is coming from database
   const _id = req.userId;
 
