@@ -2,11 +2,12 @@ const express = require("express");
 const router = express.Router();
 const {
   insertTicket,
-  getTickets,
+  // getTickets,
   getTickets1,
-  getTicketById,
+  // getTicketById,
   getTicketById1,
   updateClientReply,
+  updateStatusClose,
   deleteTicket,
 } = require("../model/ticket/ticket.model");
 const { userAuthorization } = require("../middlewares/authorization.middleware");
@@ -19,68 +20,23 @@ router.all("/", (req, res, next) => {
 // - create new ticket
 router.post("/", userAuthorization, async (req, res) => {
   try {
-    const {
-      fileNo,
-      closeDate,
-      fundDate,
-      dealType,
-      closerOne,
-      commishClOne,
-      closerTwo,
-      commishClTwo,
-      mobCloser,
-      mobFee,
-      overage,
-      processorOne,
-      commishPrOne,
-      processorTwo,
-      commishPrTwo,
-      clientRefOne,
-      clientRefTwo,
-      realAgentOne,
-      realAgentTwo,
-      lnOfficer,
-      salesRepOne,
-      salesTypeOne,
-      salesRepTwo,
-      salesTypeTwo,
-      discount,
-      discountApproval,
-      freedomCheck,
-      message,
-    } = req.body;
+    const { dateOrdered, orderedBy, recipient, address, zipCode, fileNo, packageContents, status, created, receiver } =
+      req.body;
     const userId = req.userId;
 
     const ticketObj = {
-      clientId: userId,
+      // clientId: userId,
+
+      dateOrdered: new Date(dateOrdered),
+      orderedBy,
+      recipient,
+      address,
+      zipCode,
       fileNo,
-      closeDate: new Date(closeDate),
-      fundDate: new Date(fundDate),
-      dealType,
-      closerOne,
-      commishClOne,
-      closerTwo,
-      commishClTwo,
-      mobCloser,
-      mobFee,
-      overage,
-      processorOne,
-      commishPrOne,
-      processorTwo,
-      commishPrTwo,
-      clientRefOne,
-      clientRefTwo,
-      realAgentOne,
-      realAgentTwo,
-      lnOfficer,
-      salesRepOne,
-      salesTypeOne,
-      salesRepTwo,
-      salesTypeTwo,
-      discount,
-      discountApproval,
-      freedomCheck,
-      message,
+      packageContents,
+      status,
+      created,
+      receiver,
     };
 
     const result = await insertTicket(ticketObj);
@@ -104,22 +60,22 @@ router.post("/", userAuthorization, async (req, res) => {
 });
 
 // - get all tickets for a specific user
-router.get("/", userAuthorization, async (req, res) => {
-  try {
-    const userId = req.userId;
-    const result = await getTickets(userId);
+// router.get("/", userAuthorization, async (req, res) => {
+//   try {
+//     const userId = req.userId;
+//     const result = await getTickets(userId);
 
-    return res.json({
-      status: "success",
-      result,
-    });
-  } catch (error) {
-    res.json({
-      status: "error",
-      message: error.message,
-    });
-  }
-});
+//     return res.json({
+//       status: "success",
+//       result,
+//     });
+//   } catch (error) {
+//     res.json({
+//       status: "error",
+//       message: error.message,
+//     });
+//   }
+// });
 
 // - get ALL tickets
 router.all("/1", async (req, res) => {
@@ -139,23 +95,23 @@ router.all("/1", async (req, res) => {
 });
 
 // - get ticket by ticket _id (user)
-router.get("/:_id", userAuthorization, async (req, res) => {
-  try {
-    const { _id } = req.params;
-    const clientId = req.userId;
-    const result = await getTicketById(_id, clientId);
+// router.get("/:_id", userAuthorization, async (req, res) => {
+//   try {
+//     const { _id } = req.params;
+//     const clientId = req.userId;
+//     const result = await getTicketById(_id, clientId);
 
-    return res.json({
-      status: "success",
-      result,
-    });
-  } catch (error) {
-    res.json({
-      status: "error",
-      message: error.message,
-    });
-  }
-});
+//     return res.json({
+//       status: "success",
+//       result,
+//     });
+//   } catch (error) {
+//     res.json({
+//       status: "error",
+//       message: error.message,
+//     });
+//   }
+// });
 
 // Get any ticket by id
 
@@ -179,98 +135,34 @@ router.get("/1/:_id", async (req, res) => {
 // - edit ticket form by ticket _id
 router.put("/:_id", userAuthorization, async (req, res) => {
   try {
-    const {
-      fileNo,
-      closeDate,
-      fundDate,
-      dealType,
-      closerOne,
-      commishClOne,
-      closerTwo,
-      commishClTwo,
-      mobCloser,
-      mobFee,
-      overage,
-      processorOne,
-      commishPrOne,
-      processorTwo,
-      commishPrTwo,
-      clientRefOne,
-      clientRefTwo,
-      realAgentOne,
-      realAgentTwo,
-      lnOfficer,
-      salesRepOne,
-      salesTypeOne,
-      salesRepTwo,
-      salesTypeTwo,
-      discount,
-      discountApproval,
-      freedomCheck,
-      message,
-    } = req.body;
+    const { dateOrdered, orderedBy, recipient, address, zipCode, fileNo, packageContents, status, created, receiver } =
+      req.body;
     const { _id } = req.params;
-    // const msgObj = {
-    //   _id,
-    //   fileNo,
-    //   closeDate,
-    //   fundDate,
-    //   dealType,
-    //   closerOne,
-    //   commishClOne,
-    //   closerTwo,
-    //   commishClTwo,
-    //   mobCloser,
-    //   mobFee,
-    //   overage,
-    //   processorOne,
-    //   commishPrOne,
-    //   processorTwo,
-    //   commishPrTwo,
-    //   clientRefOne,
-    //   clientRefTwo,
-    //   realAgentOne,
-    //   realAgentTwo,
-    //   lnOfficer,
-    //   salesRepOne,
-    //   salesTypeOne,
-    //   salesRepTwo,
-    //   salesTypeTwo,
-    //   discount,
-    //   discountApproval,
-    //   freedomCheck,
-    //   message,
-    // };
+    const msgObj = {
+      _id,
+      dateOrdered: new Date(dateOrdered),
+      orderedBy,
+      recipient,
+      address,
+      zipCode,
+      fileNo,
+      packageContents,
+      status,
+      created,
+      receiver,
+    };
     const result = await updateClientReply(
       _id,
+      dateOrdered,
+      orderedBy,
+      recipient,
+      address,
+      zipCode,
       fileNo,
-      closeDate,
-      fundDate,
-      dealType,
-      closerOne,
-      commishClOne,
-      closerTwo,
-      commishClTwo,
-      mobCloser,
-      mobFee,
-      overage,
-      processorOne,
-      commishPrOne,
-      processorTwo,
-      commishPrTwo,
-      clientRefOne,
-      clientRefTwo,
-      realAgentOne,
-      realAgentTwo,
-      lnOfficer,
-      salesRepOne,
-      salesTypeOne,
-      salesRepTwo,
-      salesTypeTwo,
-      discount,
-      discountApproval,
-      freedomCheck,
-      message
+      packageContents,
+      status,
+      created,
+      receiver
     );
 
     if (result._id) {
@@ -289,21 +181,20 @@ router.put("/:_id", userAuthorization, async (req, res) => {
 });
 
 // - update ticket status to closed
-router.patch("/close-ticket/:_id", userAuthorization, async (req, res) => {
+router.patch("/close-ticket/:_id", async (req, res) => {
   try {
     const { _id } = req.params;
-    const clientId = req.userId;
-    const result = await updateStatusClose({ _id, clientId });
+    const result = await updateStatusClose({ _id });
 
     if (result._id) {
       return res.json({
         status: "success",
-        message: "This ticket has been closed",
+        message: "Connected!",
       });
     }
     res.json({
       status: "error",
-      message: "Unable to close this ticket",
+      message: "Unable to get Connected",
     });
   } catch (error) {
     res.json({
