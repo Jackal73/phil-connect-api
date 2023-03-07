@@ -8,6 +8,7 @@ const TicketSchema = new Schema(
     },
 
     dateOrdered: {
+      // requested delivery date
       type: Date,
       maxlength: 50,
       required: true,
@@ -27,7 +28,7 @@ const TicketSchema = new Schema(
     },
     address: {
       type: String,
-      maxlength: 50,
+      maxlength: 200,
       required: true,
       default: "",
     },
