@@ -40,14 +40,14 @@ const TicketSchema = new Schema(
     },
     fileNo: {
       type: String,
-      maxlength: 50,
-      required: true,
+      maxlength: 150,
+      required: false,
       default: "",
     },
     packageContents: {
       type: String,
-      maxlength: 150,
-      required: false,
+      maxlength: 250,
+      required: true,
       default: "",
     },
     status: {
