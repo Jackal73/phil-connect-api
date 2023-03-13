@@ -73,7 +73,7 @@ const updateClientReply = (
   _id,
   dateOrdered,
   orderedBy,
-  from,
+  officeFrom,
   recipient,
   address,
   zipCode,
@@ -91,7 +91,7 @@ const updateClientReply = (
           $set: {
             dateOrdered,
             orderedBy,
-            from,
+            officeFrom,
             recipient,
             address,
             zipCode,

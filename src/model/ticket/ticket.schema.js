@@ -20,7 +20,7 @@ const TicketSchema = new Schema(
       required: true,
       default: "",
     },
-    from: {
+    officeFrom: {
       type: String,
       maxlength: 50,
       required: true,
