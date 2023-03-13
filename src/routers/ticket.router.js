@@ -20,8 +20,19 @@ router.all("/", (req, res, next) => {
 // - create new ticket
 router.post("/", userAuthorization, async (req, res) => {
   try {
-    const { dateOrdered, orderedBy, recipient, address, zipCode, fileNo, packageContents, status, created, receiver } =
-      req.body;
+    const {
+      dateOrdered,
+      orderedBy,
+      from,
+      recipient,
+      address,
+      zipCode,
+      fileNo,
+      packageContents,
+      status,
+      created,
+      receiver,
+    } = req.body;
     const userId = req.userId;
 
     const ticketObj = {
@@ -29,6 +40,7 @@ router.post("/", userAuthorization, async (req, res) => {
 
       dateOrdered: new Date(dateOrdered),
       orderedBy,
+      from,
       recipient,
       address,
       zipCode,
@@ -135,13 +147,25 @@ router.get("/1/:_id", async (req, res) => {
 // - edit ticket form by ticket _id
 router.put("/:_id", userAuthorization, async (req, res) => {
   try {
-    const { dateOrdered, orderedBy, recipient, address, zipCode, fileNo, packageContents, status, created, receiver } =
-      req.body;
+    const {
+      dateOrdered,
+      orderedBy,
+      from,
+      recipient,
+      address,
+      zipCode,
+      fileNo,
+      packageContents,
+      status,
+      created,
+      receiver,
+    } = req.body;
     const { _id } = req.params;
     const msgObj = {
       _id,
       dateOrdered: new Date(dateOrdered),
       orderedBy,
+      from,
       recipient,
       address,
       zipCode,
@@ -155,6 +179,7 @@ router.put("/:_id", userAuthorization, async (req, res) => {
       _id,
       dateOrdered,
       orderedBy,
+      from,
       recipient,
       address,
       zipCode,

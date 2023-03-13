@@ -20,6 +20,12 @@ const TicketSchema = new Schema(
       required: true,
       default: "",
     },
+    from: {
+      type: String,
+      maxlength: 50,
+      required: true,
+      default: "",
+    },
     recipient: {
       type: String,
       maxlength: 50,
