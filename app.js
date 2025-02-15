@@ -68,10 +68,10 @@ const ticketRouter = require("./src/routers/ticket.router");
 const tokensRouter = require("./src/routers/tokens.router");
 
 // -------------- Use routers ---------------------------
-app.use("/v1/user", userRouter);
-app.use("/v1/ticket", ticketRouter);
-app.use("/v1/ticket/1", ticketRouter);
-app.use("/v1/tokens", tokensRouter);
+app.use("/user", userRouter);
+app.use("/ticket", ticketRouter);
+app.use("/ticket/1", ticketRouter);
+app.use("/tokens", tokensRouter);
 
 app.get("/", (req, res) => {
   res.send("APP IS RUNNING!");
