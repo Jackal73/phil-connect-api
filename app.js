@@ -22,7 +22,7 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 
 // -------------- PORT to use ---------------------------
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 8800;
 
 const app = express();
 
@@ -44,19 +44,19 @@ mongoose.connect(MONGO_URL, {
   useCreateIndex: true,
 });
 
-if (process.env.NODE_ENV !== "production") {
-  const mDb = mongoose.connection;
-  mDb.on("open", () => {
-    console.log("MongoDB is connected");
-  });
+// if (process.env.NODE_ENV !== "production") {
+//   const mDb = mongoose.connection;
+//   mDb.on("open", () => {
+//     console.log("MongoDB is connected");
+//   });
 
-  mDb.on("error", (error) => {
-    console.log(error);
-  });
+//   mDb.on("error", (error) => {
+//     console.log(error);
+//   });
 
-  //Logger
-  app.use(morgan("tiny"));
-}
+//   //Logger
+//   app.use(morgan("tiny"));
+// }
 
 // -------------- Set bodyParser middleware ------------------------
 app.use(bodyParser.urlencoded({ extended: true }));
