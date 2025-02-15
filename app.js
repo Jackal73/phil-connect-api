@@ -11,7 +11,7 @@ const corsOptions = {
     "https://phil-connect.adaptable.app", // access-control-allow-origin: http://phil-connect.adaptable.app,
     "https://localhost:3001",
     "https://localhost:3002",
-    "https://phil-connect-api.onrender.com",
+    "https://phil-connect-api.onrender.com", //  access-control-allow-origin: https://phil-connect-api.onrender.com,
   ],
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
   credentials: true, // access-control-allow-credentials:true,
@@ -68,10 +68,10 @@ const ticketRouter = require("./src/routers/ticket.router");
 const tokensRouter = require("./src/routers/tokens.router");
 
 // -------------- Use routers ---------------------------
-app.use("/user", userRouter);
-app.use("/ticket", ticketRouter);
-app.use("/ticket/1", ticketRouter);
-app.use("/tokens", tokensRouter);
+app.use("/v1/user", userRouter);
+app.use("/v1/ticket", ticketRouter);
+app.use("/v1/ticket/1", ticketRouter);
+app.use("/v1/tokens", tokensRouter);
 
 app.get("/", (req, res) => {
   res.send("APP IS RUNNING!");
