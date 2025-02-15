@@ -12,6 +12,8 @@ const corsOptions = {
     "https://localhost:3001",
     "https://localhost:3002",
     "https://phil-connect-api.onrender.com", // access-control-allow-origin: https://phil-connect-api.onrender.com,
+    "https://phil-connect-client.onrender.com",
+    "https://phil-connect-api.onrender.com/v1/user/login", //https://phil-connect-api.onrender.com/v1/user/login /https://phil-connect-api.onrender.com/v1/user/login/ access-control-allow-origin: https://phil-connect-client.onrender.com,
   ],
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
   credentials: true, // access-control-allow-credentials:true,
