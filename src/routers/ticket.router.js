@@ -10,7 +10,9 @@ const {
   updateStatusClose,
   deleteTicket,
 } = require("../model/ticket/ticket.model");
-const { userAuthorization } = require("../middlewares/authorization.middleware");
+const {
+  userAuthorization,
+} = require("../middlewares/authorization.middleware");
 const { TicketSchema } = require("../model/ticket/ticket.schema");
 
 router.all("/", (req, res, next) => {

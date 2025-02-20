@@ -6,8 +6,8 @@ const transporter = nodemailer.createTransport({
   port: 465,
   secure: true, // true for 465, false for other ports
   auth: {
-    user: "shawnkebel@kryptomix.digital",
-    pass: "Jojo1988*",
+    user: process.env.ZOHO_AUTH_USER,
+    pass: process.env.ZOHO_USER_PASS,
   },
 });
 
@@ -32,27 +32,29 @@ const emailProcessor = ({ email, pin, type, verificationLink = "" }) => {
   switch (type) {
     case "request-new-password":
       info = {
-        from: '"Phil Connection " <shawnkebel@kryptomix.digital>', // sender address
+        from: '"PHIL Connection " <shawnkebel@taptae.org>', // sender address
         to: email, // list of receivers
         subject: "Password Reset PIN", // Subject line
-        text: "Here is your Password Reset PIN: " + pin + " This PIN will expire in 1 day.", // plain text body
-        html: `<b>Hello</b>.
-        Here is your PIN:
-        <b> ${pin}</b>.
-        This PIN will expire in 24 hours.
-        <p></p>`, // html body
+        text:
+          "Here is your Password Reset PIN: " +
+          pin +
+          " This PIN will expire in 1 day.", // plain text body
+        html: `Hello,<br>
+        <p>Here is your PIN:
+        <b>  ${pin}</b></p>
+        <p>This PIN will expire in 24 hours.</p>`, // html body
       };
-
+      console.log(info);
       send(info);
       break;
 
     case "update-password-success":
       info = {
-        from: '"Phil Connection " <shawnkebel@kryptomix.digital>', // sender address
+        from: '"PHIL Connection " <shawnkebel@taptae.org>', // sender address
         to: email, // list of receivers
         subject: "Password updated", // Subject line
         text: "Your new password has been updated.", // plain text body
-        html: `<b>Hello,</b>.
+        html: `Hello,<br>
         <p>Your new password has been updated.</p>`, // html body
       };
 
@@ -61,7 +63,7 @@ const emailProcessor = ({ email, pin, type, verificationLink = "" }) => {
 
     case "new-user-confirmation-required":
       info = {
-        from: '"Phil Connection " <shawnkebel@kryptomix.digital>', // sender address
+        from: '"PHIL Connection " <shawnkebel@taptae.org>', // sender address
         to: email, // list of receivers
         subject: "Please verify your new user", // Subject line
         text: "Please follow the link to verify your account.", // plain text body

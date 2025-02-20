@@ -9,7 +9,11 @@ const {
   storeUserRefreshJWT,
   verifyUser,
 } = require("../model/user/user.model");
-const { setPasswordResetPin, getPinByEmailPin, deletePin } = require("../model/resetPin/pin.model");
+const {
+  setPasswordResetPin,
+  getPinByEmailPin,
+  deletePin,
+} = require("../model/resetPin/pin.model");
 const { emailProcessor } = require("../helpers/email.helper");
 const {
   resetPassReqValidation,
@@ -19,9 +23,12 @@ const {
 const { deleteJWT } = require("../helpers/redis.helper");
 const { hashPassword, comparePassword } = require("../helpers/bcrypt.helper");
 const { createAccessJWT, createRefreshJWT } = require("../helpers/jwt.helper");
-const { userAuthorization } = require("../middlewares/authorization.middleware");
+const {
+  userAuthorization,
+} = require("../middlewares/authorization.middleware");
 
-const verificationURL = "https://phil-connect.adaptable.app/verification/";
+const verificationURL =
+  "https://phil-connect-client.onrender.com/verification/";
 // const verificationURL = "http://localhost:3000/verification/";
 
 router.all("/", (req, res, next) => {
@@ -103,7 +110,8 @@ router.post("/", newUserValidation, async (req, res) => {
   } catch (error) {
     console.log(error);
 
-    let message = "Unable to create new user at this time. Please try again or contact software support.";
+    let message =
+      "Unable to create new user at this time. Please try again or contact software support.";
     if (error.message.includes("duplicate key error collection")) {
       message = "This email already has an account.";
     }
@@ -134,7 +142,8 @@ router.post("/login", async (req, res) => {
 
   const passFromDb = user && user._id ? user.password : null;
 
-  if (!passFromDb) return res.json({ status: "error", message: "Invalid Email or Password" });
+  if (!passFromDb)
+    return res.json({ status: "error", message: "Invalid Email or Password" });
 
   const result = await comparePassword(password, passFromDb);
 
@@ -168,13 +177,14 @@ router.post("/reset-password", resetPassReqValidation, async (req, res) => {
 
     return res.json({
       status: "success",
-      message: "If the email exists in our database, the password reset PIN will be sent shortly.",
+      message:
+        "Since the email exists in our database, a password reset PIN will be sent shortly.",
     });
   }
 
   res.json({
     status: "error",
-    message: "If the email exists in our database, the password reset PIN will be sent shortly.",
+    message: "This email does not exist in our database.",
   });
 });
 
